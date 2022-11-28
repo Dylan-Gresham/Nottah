@@ -88,29 +88,32 @@ public class Main extends Application
             FileChooser file = new FileChooser();
             file.setTitle("Save File");
             File saveFile = file.showSaveDialog(primStage);
-            Path saveFilePath = saveFile.toPath();
-
-            if(Files.exists(saveFilePath))
+            
+            if(saveFile != null)
             {
-                try
+                Path saveFilePath = saveFile.toPath();
+                if(Files.exists(saveFilePath))
                 {
-                    BufferedWriter br = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                    br.write(notes.getText());
-                    br.close(); // By default, flushes before closing
+                    try
+                    {
+                        BufferedWriter br = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
+                        br.write(notes.getText());
+                        br.close(); // By default, flushes before closing
+                    }
+                    catch (Exception ex) {ex.printStackTrace();}
                 }
-                catch (Exception ex) {ex.printStackTrace();}
-            }
-            else if(!Files.exists(saveFilePath))
-            {
-                try
+                else if(!Files.exists(saveFilePath))
                 {
-                    Files.createFile(saveFilePath.toAbsolutePath());
-
-                    BufferedWriter br = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                    br.write(notes.getText());
-                    br.close(); // By default, flushes before closing
+                    try
+                    {
+                        Files.createFile(saveFilePath.toAbsolutePath());
+    
+                        BufferedWriter br = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
+                        br.write(notes.getText());
+                        br.close(); // By default, flushes before closing
+                    }
+                    catch (Exception exc) {exc.printStackTrace();}
                 }
-                catch (Exception exc) {exc.printStackTrace();}
             }
         });
 
