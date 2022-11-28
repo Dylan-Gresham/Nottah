@@ -1,0 +1,119 @@
+#mainBord
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#controlBar
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#notes
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#notes .content
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Times New Roman';
+    -fx-font-family: times_new_roman;
+}
+
+#boldBut
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#italicBut
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#underBut
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#takeBox
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#openBut
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
+
+#saveBut
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+}
