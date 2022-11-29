@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -44,6 +45,8 @@ public class Main extends Application
     @Override
     public void start(Stage primStage) throws IOException
     {
+        primStage.setMaximized(true);
+
         mainBord = new BorderPane();
         mainBord.setId("mainBord");
         controlBar = new HBox();
@@ -53,6 +56,8 @@ public class Main extends Application
         notes.setWrapText(true);
         notes.setPromptText("Thoughts in class...");
         notes.setId("notes");
+        notes.setMaxHeight(960);
+        notes.setMaxWidth(720);
         
         openBut = new Button("Open");
         openBut.setOnAction(e ->
@@ -117,17 +122,21 @@ public class Main extends Application
             }
         });
 
-        boldBut = new Button("B");
-        italicBut = new Button("I");
-        underBut = new Button("U");
+        // Bold/Italic/Underline buttons will be implemented later on.
+        // boldBut = new Button("B");
+        // italicBut = new Button("I");
+        // underBut = new Button("U");
         takeBox = new CheckBox("Take");
 
-        boldBut.setId("boldBut");
-        italicBut.setId("italicBut");
-        underBut.setId("underBut");
+        // boldBut.setId("boldBut");
+        // italicBut.setId("italicBut");
+        // underBut.setId("underBut");
         takeBox.setId("takeBox");
         openBut.setId("openBut");
         saveBut.setId("saveBut");
+        takeBox.setAlignment(Pos.CENTER);
+        openBut.setAlignment(Pos.CENTER);
+        saveBut.setAlignment(Pos.CENTER);
 
         takeBox.setSelected(true);
         takeBox.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) ->
@@ -143,7 +152,7 @@ public class Main extends Application
                 notes.setEditable(false);
             }
         });
-        controlBar.getChildren().addAll(openBut, saveBut, boldBut, italicBut, underBut, takeBox);
+        controlBar.getChildren().addAll(openBut, saveBut, takeBox);
 
         mainBord.setCenter(notes);
         mainBord.setTop(controlBar);
