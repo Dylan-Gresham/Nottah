@@ -1,3 +1,21 @@
+.stage
+{
+    background-color: 212121;
+    -fx-background-color: #212121;
+    border-color: #121212;
+    -fx-border-color: #121212;
+    border-radius: 2px;
+    -fx-border-radius: 2px;
+    color: white;
+    -fx-text-fill: white;
+    font-size: 12px;
+    -fx-font-size: 12pt;
+    font-family: 'Fira Code' monospace;
+    -fx-font-family: times_new_roman;
+    padding: 3px;
+    -fx-padding: 3px;
+}
+
 #mainBord
 {
     background-color: 212121;
@@ -54,6 +72,9 @@
 {
     background-color: 212121;
     -fx-background-color: #212121;
+    border-radius: 2px;
+    -fx-border-radius: 2px;
+    -fx-background-radius: 0;
     color: white;
     -fx-text-fill: white;
     font-size: 12px;
