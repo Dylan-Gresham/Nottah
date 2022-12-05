@@ -1,5 +1,6 @@
 package dylan.gresham;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -71,14 +72,11 @@ public class Main extends Application
                 {
                     try
                     {
-                        Scanner sc = new Scanner(toOpenFile);
-                        String toWrite = "";
-                        while(sc.hasNext())
+                        BufferedReader br = Files.newBufferedReader(toOpenFile.toPath(), StandardCharsets.UTF_8);
+                        while(br.readLine() != null)
                         {
-                            toWrite += sc.next() + " ";
+                            notes.appendText(br.readLine());
                         }
-                        sc.close();
-                        notes.appendText(toWrite);
                     } catch (Exception excp)
                     {
                         excp.printStackTrace();
