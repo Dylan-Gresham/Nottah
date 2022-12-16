@@ -53,6 +53,8 @@ public class Main extends Application
         controlBar = new HBox();
         controlBar.setId("controlBar");
         
+        // TODO: Gotta change notes to be a div container to be able to be able to hold rich content.
+        // See https://stackoverflow.com/questions/12831101/format-text-in-a-textarea
         notes = new TextArea();
         notes.setWrapText(true);
         notes.setPromptText("Thoughts in class...");
@@ -132,20 +134,26 @@ public class Main extends Application
         openBut.setOnMouseExited(e -> {primScene.setCursor(Cursor.DEFAULT);});
 
         // Bold/Italic/Underline buttons will be implemented later on.
-        // boldBut = new Button("B");
+        boldBut = new Button("B");
         // italicBut = new Button("I");
         // underBut = new Button("U");
         takeBox = new CheckBox("Take");
 
-        // boldBut.setId("boldBut");
+        boldBut.setId("boldBut");
         // italicBut.setId("italicBut");
         // underBut.setId("underBut");
         takeBox.setId("takeBox");
         openBut.setId("openBut");
         saveBut.setId("saveBut");
+        boldBut.setAlignment(Pos.CENTER);
         takeBox.setAlignment(Pos.CENTER);
         openBut.setAlignment(Pos.CENTER);
         saveBut.setAlignment(Pos.CENTER);
+
+        boldBut.setOnAction(e -> 
+        {
+            // TODO: Implement
+        });
 
         takeBox.setSelected(true);
         takeBox.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) ->
