@@ -73,10 +73,12 @@ public class Main extends Application
                     try
                     {
                         BufferedReader br = Files.newBufferedReader(toOpenFile.toPath(), StandardCharsets.UTF_8);
-                        while(br.readLine() != null)
+                        String line;
+                        while((line = br.readLine()) != null)
                         {
-                            notes.appendText(br.readLine());
+                            notes.appendText(line + "\n");
                         }
+                        br.close();
                     } catch (Exception excp)
                     {
                         excp.printStackTrace();
@@ -99,9 +101,9 @@ public class Main extends Application
                 {
                     try
                     {
-                        BufferedWriter br = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                        br.write(notes.getText());
-                        br.close(); // By default, flushes before closing
+                        BufferedWriter bw = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
+                        bw.write(notes.getText());
+                        bw.close(); // By default, flushes before closing
                     }
                     catch (Exception ex) {ex.printStackTrace();}
                 }
@@ -111,9 +113,9 @@ public class Main extends Application
                     {
                         Files.createFile(saveFilePath.toAbsolutePath());
     
-                        BufferedWriter br = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                        br.write(notes.getText());
-                        br.close(); // By default, flushes before closing
+                        BufferedWriter bw = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
+                        bw.write(notes.getText());
+                        bw.close(); // By default, flushes before closing
                     }
                     catch (Exception exc) {exc.printStackTrace();}
                 }
