@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Scanner;
 import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -63,6 +63,7 @@ public class Main extends Application
         openBut = new Button("Open");
         openBut.setOnAction(e ->
         {
+            primScene.setCursor(Cursor.WAIT);
             FileChooser file = new FileChooser();
             file.setTitle("Open File");
             File toOpenFile = file.showOpenDialog(primStage);
@@ -85,11 +86,13 @@ public class Main extends Application
                     }
                 }
             }
+            primScene.setCursor(Cursor.DEFAULT);
         });
 
         saveBut = new Button("Save");
         saveBut.setOnAction(e ->
         {
+            primScene.setCursor(Cursor.WAIT);
             FileChooser file = new FileChooser();
             file.setTitle("Save File");
             File saveFile = file.showSaveDialog(primStage);
@@ -120,7 +123,13 @@ public class Main extends Application
                     catch (Exception exc) {exc.printStackTrace();}
                 }
             }
+            primScene.setCursor(Cursor.DEFAULT);
         });
+
+        saveBut.setOnMouseEntered(e -> {primScene.setCursor(Cursor.HAND);});
+        saveBut.setOnMouseExited(e -> {primScene.setCursor(Cursor.DEFAULT);});
+        openBut.setOnMouseEntered(e -> {primScene.setCursor(Cursor.HAND);});
+        openBut.setOnMouseExited(e -> {primScene.setCursor(Cursor.DEFAULT);});
 
         // Bold/Italic/Underline buttons will be implemented later on.
         // boldBut = new Button("B");
