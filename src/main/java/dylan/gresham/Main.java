@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
+// import javafx.scene.web;
 // import javafx.scene.web.HTMLEditor;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
