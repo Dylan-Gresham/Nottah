@@ -18,8 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
-// import javafx.scene.web;
-// import javafx.scene.web.HTMLEditor;
+import javafx.scene.web.HTMLEditor;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -36,11 +35,11 @@ public class Main extends Application
     @FXML
     private HBox controlBar;
 
-    @FXML
-    private TextArea notes;
-
     // @FXML
-    // private HTMLEditor area;
+    // private TextArea notes;
+
+    @FXML
+    private HTMLEditor notes;
 
     @FXML
     private Button openBut, saveBut, boldBut, italicBut, underBut;
@@ -58,9 +57,14 @@ public class Main extends Application
         controlBar = new HBox();
         controlBar.setId("controlBar");
         
-        notes = new TextArea();
-        notes.setWrapText(true);
-        notes.setPromptText("Thoughts in class...");
+        // notes = new TextArea();
+        // notes.setWrapText(true);
+        // notes.setPromptText("Thoughts in class...");
+        // notes.setId("notes");
+        // notes.setMaxHeight(960);
+        // notes.setMaxWidth(720);
+
+        notes = new HTMLEditor();
         notes.setId("notes");
         notes.setMaxHeight(960);
         notes.setMaxWidth(720);
@@ -80,11 +84,19 @@ public class Main extends Application
                     {
                         BufferedReader br = Files.newBufferedReader(toOpenFile.toPath(), StandardCharsets.UTF_8);
                         String line;
+                        String content = "";
                         while((line = br.readLine()) != null)
                         {
-                            notes.appendText(line + "\n");
+                            content = line + "\n";
                         }
                         br.close();
+                        if(content.substring(0, 5).equals("<html>"))
+                            notes.setHtmlText(content);
+                        else
+                        {
+                            notes.setHtmlText("<html dir=\"ltr\"><head></head><body contenteditable=\"true\"><p><span style=\"font-family:" +
+                                              " &quot;&quot;;\">" + content + "</span></p></body></html>");
+                        }
                     } catch (Exception excp)
                     {
                         excp.printStackTrace();
@@ -110,7 +122,7 @@ public class Main extends Application
                     try
                     {
                         BufferedWriter bw = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                        bw.write(notes.getText());
+                        bw.write(notes.getHtmlText());
                         bw.close(); // By default, flushes before closing
                     }
                     catch (Exception ex) {ex.printStackTrace();}
@@ -122,7 +134,7 @@ public class Main extends Application
                         Files.createFile(saveFilePath.toAbsolutePath());
     
                         BufferedWriter bw = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                        bw.write(notes.getText());
+                        bw.write(notes.getHtmlText());
                         bw.close(); // By default, flushes before closing
                     }
                     catch (Exception exc) {exc.printStackTrace();}
@@ -136,27 +148,11 @@ public class Main extends Application
         openBut.setOnMouseEntered(e -> {primScene.setCursor(Cursor.HAND);});
         openBut.setOnMouseExited(e -> {primScene.setCursor(Cursor.DEFAULT);});
 
-        // Bold/Italic/Underline buttons will be implemented later on.
-        boldBut = new Button("B");
-        // italicBut = new Button("I");
-        // underBut = new Button("U");
         takeBox = new CheckBox("Take");
 
-        boldBut.setId("boldBut");
-        // italicBut.setId("italicBut");
-        // underBut.setId("underBut");
         takeBox.setId("takeBox");
         openBut.setId("openBut");
         saveBut.setId("saveBut");
-        boldBut.setAlignment(Pos.CENTER);
-        takeBox.setAlignment(Pos.CENTER);
-        openBut.setAlignment(Pos.CENTER);
-        saveBut.setAlignment(Pos.CENTER);
-
-        boldBut.setOnAction(e -> 
-        {
-            // TODO: Implement
-        });
 
         takeBox.setSelected(true);
         takeBox.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldVal, Boolean newVal) ->
@@ -164,12 +160,12 @@ public class Main extends Application
             if(takeBox.isSelected())
             {
                 takeBox.setText("Take");
-                notes.setEditable(true);
+                // notes.setEditable(true);
             }
             else
             {
                 takeBox.setText("Read");
-                notes.setEditable(false);
+                // notes.setEditable(false);
             }
         });
         controlBar.getChildren().addAll(openBut, saveBut, takeBox);
