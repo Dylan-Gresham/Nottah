@@ -1,6 +1,5 @@
 package dylan.gresham;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -11,18 +10,18 @@ import javafx.application.Application;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.web.HTMLEditor;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.web.HTMLEditor;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.fxmisc.richtext.GenericStyledArea;
 
 public class Main extends Application
 {
@@ -35,36 +34,31 @@ public class Main extends Application
     @FXML
     private HBox controlBar;
 
-    // @FXML
-    // private TextArea notes;
-
-    @FXML
-    private HTMLEditor notes;
-
     @FXML
     private Button openBut, saveBut, boldBut, italicBut, underBut;
 
     @FXML
     private CheckBox takeBox;
 
+    @FXML
+    private GenericStyledArea<PS, SEG, S> notes;
+
     @Override
     public void start(Stage primStage) throws IOException
     {
         primStage.setMaximized(true);
 
+        // Changes app icon.
+        primStage.getIcons().add(new Image("C:/Users/dylan/Desktop/Images/nottahRin.jpg"));
+        primStage.getIcons().add(new Image(Main.class.getResourceAsStream("C:/Users/dylan/Desktop/Images/nottahRin.jpg")));
+
         mainBord = new BorderPane();
         mainBord.setId("mainBord");
         controlBar = new HBox();
         controlBar.setId("controlBar");
-        
-        // notes = new TextArea();
-        // notes.setWrapText(true);
-        // notes.setPromptText("Thoughts in class...");
-        // notes.setId("notes");
-        // notes.setMaxHeight(960);
-        // notes.setMaxWidth(720);
 
-        notes = new HTMLEditor();
+        notes = new GenericStyledArea<PS,SEG,S>(
+            , null, null, null, null); // TODO: Figure this shit out. https://github.com/FXMisc/RichTextFX
         notes.setId("notes");
         notes.setMaxHeight(960);
         notes.setMaxWidth(720);
@@ -76,27 +70,20 @@ public class Main extends Application
             FileChooser file = new FileChooser();
             file.setTitle("Open File");
             File toOpenFile = file.showOpenDialog(primStage);
+
             if(toOpenFile != null)
             {
                 if(toOpenFile.exists())
                 {
                     try
                     {
-                        BufferedReader br = Files.newBufferedReader(toOpenFile.toPath(), StandardCharsets.UTF_8);
-                        String line;
-                        String content = "";
-                        while((line = br.readLine()) != null)
-                        {
-                            content = line + "\n";
-                        }
-                        br.close();
-                        if(content.substring(0, 5).equals("<html>"))
-                            notes.setHtmlText(content);
-                        else
-                        {
-                            notes.setHtmlText("<html dir=\"ltr\"><head></head><body contenteditable=\"true\"><p><span style=\"font-family:" +
-                                              " &quot;&quot;;\">" + content + "</span></p></body></html>");
-                        }
+                        StringBuilder sb = new StringBuilder();
+                       
+                        // sb.append("<pre>");
+                        Files.lines(toOpenFile.toPath()).forEach(line -> sb.append(line).append("\n"));
+                        // sb.append("</pre>");
+                        
+                        notes.setHtmlText(sb.toString());
                     } catch (Exception excp)
                     {
                         excp.printStackTrace();
@@ -121,9 +108,11 @@ public class Main extends Application
                 {
                     try
                     {
-                        BufferedWriter bw = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
-                        bw.write(notes.getHtmlText());
-                        bw.close(); // By default, flushes before closing
+                        Files.write(saveFilePath, removeHTML(notes.getHtmlText()).getBytes());
+                        
+                        // BufferedWriter bw = Files.newBufferedWriter(saveFilePath, StandardCharsets.UTF_8);
+                        // bw.write(notes.getHtmlText());
+                        // bw.close(); // By default, flushes before closing
                     }
                     catch (Exception ex) {ex.printStackTrace();}
                 }
@@ -189,6 +178,19 @@ public class Main extends Application
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
+    }
+
+    private String removeHTML(String text)
+    {
+        String ret = text;
+
+        while(ret.contains("<"))
+        {
+            int idx = ret.indexOf("<");
+            ret = ret.substring(0, idx) + ret.substring(ret.indexOf(">") + 1);
+        }
+
+        return ret;
     }
     
     public static void main(String[] args)
