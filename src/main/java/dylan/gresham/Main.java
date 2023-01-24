@@ -49,8 +49,7 @@ public class Main extends Application
         primStage.setMaximized(true);
 
         // Changes app icon.
-        primStage.getIcons().add(new Image("C:/Users/dylan/Desktop/Images/nottahRin.jpg"));
-        primStage.getIcons().add(new Image(Main.class.getResourceAsStream("C:/Users/dylan/Desktop/Images/nottahRin.jpg")));
+        primStage.getIcons().add(new Image(Main.class.getResourceAsStream("nottahRin.jpg")));
 
         mainBord = new BorderPane();
         mainBord.setId("mainBord");
