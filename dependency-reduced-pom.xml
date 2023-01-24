@@ -21,7 +21,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>dylan.gresham.Main</mainClass>
+              <mainClass>dylan.gresham.Driver</mainClass>
             </configuration>
           </execution>
         </executions>

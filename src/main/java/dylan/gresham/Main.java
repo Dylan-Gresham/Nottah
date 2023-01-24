@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -48,13 +49,14 @@ public class Main extends Application
     {
         primStage.setMaximized(true);
 
+        // Change app icon.
+        primStage.getIcons().add(new Image(Main.class.getResourceAsStream("nottahRin.jpg")));
+
         mainBord = new BorderPane();
         mainBord.setId("mainBord");
         controlBar = new HBox();
         controlBar.setId("controlBar");
         
-        // TODO: Gotta change notes to be a div container to be able to be able to hold rich content.
-        // See https://stackoverflow.com/questions/12831101/format-text-in-a-textarea
         notes = new TextArea();
         notes.setWrapText(true);
         notes.setPromptText("Thoughts in class...");
