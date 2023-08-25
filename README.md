@@ -34,7 +34,7 @@ To Use:
 
 ## Future Plans
 
-* Switch from JavaFX TextArea to a div container for rich text capabilites
+* Switch from JavaFX to Electron.js or Qt
 * Implement opening to last file edited
 * Improve visual design of the program (requires more skill & creativity with CSS)
 * Animation on opening/closing the program
