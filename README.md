@@ -15,7 +15,8 @@ to make new txt files, open existing ones, and be able to modify and save txt fi
 ## Downloading & Using
 
 To Download:
-* Download the latest release from the [Github page](https://github.com/DylanGresham/nottah)
+* Download Java from [Oracle's Java Website](https://www.java.com/en/download/)
+* Download the latest release from the [Github releases page](https://github.com/Dylan-Gresham/Nottah/releases/tag/v1.1.0)
 * Locate the Nottah.jar file in the target folder
 * Move Nottah.jar to desired location/pin to taskbar
 
